@@ -66,7 +66,7 @@ HANGMANPICS = ['''
       |
 =========''']
  
-word_list = ["danger", "fox", "camel", "song", "grass", "follow", "castle", "cloud", "python", "power", "game", "display", "rainforest", "environment", "creative", "coding" ]
+word_list = ["danger", "fox", "camel", "song", "grass", "follow", "castle", "cloud", "python", "power", "game", "display", "rainforest", "environment", "creative", "coding", "sky", "computer", "phone", "clock", "mouse", "pencil", "monitor", "socks", "hand", "mouth", "chair", "desk", "class", "blind", "black", "teacher", "wind", "snow", "lane", "rain", "cube", "math", "scientist", "book", "soup", "soap", "onomatopoeia", "revolution" ]
  
 chosen_word = list(random.choice(word_list))
  
