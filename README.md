@@ -30,13 +30,35 @@ The computer randomly selects a word from a word list, and the user tries to gue
 
 ### What I Learned  
 - Replacing letters in a blank list  
-- showing the user the answer when lost
+- Showing the user the answer when lost
 - Comparing lists with `if blank_list == chosen_word`
-- using variables
+- Using variables
 
 ### What Was Difficult  
 Managing global variables was a little confusing at first.  
 Also, understanding how to match and reveal correct letters in the word using `enumerate()` took some practice.
 
 ### What I Want to Improve  
-- showing what the user already guessed
+- Showing what the user already guessed
+
+_________________________________________________________________________________________________________________________________________________________________________________________________
+
+## Project: RPG game  
+**Date**: April 25, 2025  
+**Language**: Python
+
+### What the Project Does  
+This code makes a character and that chrator is exploring the dark cave where there are lots of monsters
+During the development process, I occasionally used ChatGPT as a tool to ask for suggestions and to debug certain parts of the code. All creative direction, design, and integration were entirely done by me.
+
+### What I Learned  
+- Showing the player what it can do
+- Using percentage
+- Using variables
+
+### What Was Difficult  
+Balancing the difficulty between early, mid, and late game enemies was challenging.
+It was also tricky to manage multiple combat situations, like handling secret rooms with consecutive battles, while maintaining a smooth flow without errors.
+
+### What I Want to Improve  
+-Making the game more balenced
