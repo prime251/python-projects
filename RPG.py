@@ -7,6 +7,8 @@ class Character:
         self.gender = ""
         self.health = 1
         self.health_max = 1
+        self.attack_power = 1
+        self.defense = 0
 
     def do_damage(self, enemy, attack_power=1):
         damage = min(max(attack_power, 1), enemy.health)
@@ -16,12 +18,19 @@ class Character:
 # ===== Enemy Class =====
 class Enemy(Character):
     enemy_data = {
+        # 초급 몬스터
         'Rat': {'health': 3, 'attack': 1},
         'Slime': {'health': 5, 'attack': 2},
+        'Baby Slime': {'health': 4, 'attack': 1},
+        'Little Rat': {'health': 2, 'attack': 1},
+        # 중급 몬스터
         'Imp': {'health': 7, 'attack': 3},
         'Goblin': {'health': 8, 'attack': 3},
         'Orc Warrior': {'health': 12, 'attack': 4},
         'Skeleton Soldier': {'health': 14, 'attack': 5},
+        'Dark Imp': {'health': 10, 'attack': 4},
+        'Skeleton Archer': {'health': 12, 'attack': 5},
+        # 고급 몬스터
         'Orc': {'health': 15, 'attack': 5},
         'Troll': {'health': 20, 'attack': 6},
         'Skeleton': {'health': 12, 'attack': 6},
@@ -30,38 +39,40 @@ class Enemy(Character):
         'Ninja': {'health': 15, 'attack': 8},
         'Minotaur': {'health': 25, 'attack': 9},
         'Dark Knight': {'health': 28, 'attack': 10},
-        'Dragon': {'health': 50, 'attack': 12},
-        'Lich': {'health': 45, 'attack': 14}
+        'Warlock': {'health': 30, 'attack': 11},
+        'Ogre': {'health': 35, 'attack': 12},
+        # 보스 몬스터
+        'Dragon': {'health': 78, 'attack': 17},
+        'Lich': {'health': 65, 'attack': 15},
+        'Hydra': {'health': 100, 'attack': 20},
     }
 
     def __init__(self, player, difficulty_level):
         super().__init__()
         if difficulty_level < 10:
-            choices = ['Rat', 'Slime']
+            choices = ['Rat', 'Slime', 'Baby Slime', 'Little Rat']
         elif difficulty_level < 20:
-            choices = ['Imp', 'Goblin', 'Orc Warrior', 'Skeleton Soldier']
+            choices = ['Imp', 'Goblin', 'Orc Warrior', 'Skeleton Soldier', 'Dark Imp', 'Skeleton Archer']
         elif difficulty_level < 30:
-            choices = ['Orc', 'Troll', 'Skeleton', 'Zombie', 'Bomber', 'Ninja']
+            choices = ['Orc', 'Troll', 'Skeleton', 'Zombie', 'Bomber', 'Ninja', 'Minotaur', 'Dark Knight', 'Warlock', 'Ogre']
         else:
-            choices = list(Enemy.enemy_data.keys())
+            choices = ['Dragon', 'Lich', 'Hydra']
         self.name = choice(choices)
         self.health = Enemy.enemy_data[self.name]['health']
         self.attack_power = Enemy.enemy_data[self.name]['attack']
-        self.is_boss = self.name in ['Dragon', 'Lich']
-        self.is_elite = self.name in ['Orc', 'Troll', 'Skeleton', 'Zombie', 'Bomber', 'Ninja', 'Minotaur', 'Dark Knight']
-
-# ===== Player Class =====
+        self.is_boss = self.name in ['Dragon', 'Lich', 'Hydra']
+        self.is_elite = self.name in ['Orc', 'Troll', 'Skeleton', 'Zombie', 'Bomber', 'Ninja', 'Minotaur', 'Dark Knight', 'Warlock', 'Ogre']
 class Player(Character):
     shop_items = {
-        'sword': 30,
-        'axe': 50,
-        'magic_wand': 70,
-        'battle_axe': 100,
-        'mystic_staff': 120,
-        'shield': 30,
-        'armor': 50,
-        'heavy_armor': 70,
-        'potion': 20,
+        'sword': {'price': 30, 'attack': 2},
+        'axe': {'price': 50, 'attack': 3},
+        'magic_wand': {'price': 70, 'attack': 4},
+        'battle_axe': {'price': 100, 'attack': 5},
+        'mystic_staff': {'price': 120, 'attack': 6},
+        'shield': {'price': 30, 'defense': 2},
+        'armor': {'price': 50, 'defense': 4},
+        'heavy_armor': {'price': 70, 'defense': 6},
+        'potion': {'price': 30}
     }
 
     def __init__(self):
@@ -70,6 +81,9 @@ class Player(Character):
         self.health = 20
         self.health_max = 20
         self.attack_power = 2
+        self.defense = 0
+        self.gold = 0
+        self.xp = 0
         self.inventory_items = ['wooden_sword']
         self.equipped_weapon = 'wooden_sword'
         self.equipped_armor = None
@@ -78,14 +92,15 @@ class Player(Character):
         self.explore_count = 0
         self.quest_kill_goal = 5
         self.quest_kill_progress = 0
-        self.xp = 0
-        self.gold = 0
 
     def help(self):
         print(list(Commands.keys()))
 
     def status(self):
-        print(f"{self.name}'s Health: {self.health}/{self.health_max}, Attack: {self.attack_power:.1f}, Gold: {self.gold}")
+        weapon_info = f"Weapon: {self.equipped_weapon}" if self.equipped_weapon else "No weapon"
+        armor_info = f"Armor: {self.equipped_armor}" if self.equipped_armor else "No armor"
+        print(f"{self.name}'s Health: {self.health}/{self.health_max}, Attack: {self.attack_power:.1f}, Defense: {self.defense}, Gold: {self.gold}")
+        print(weapon_info, "|", armor_info)
 
     def inventory(self):
         print(f"Inventory: {', '.join(self.inventory_items)}")
@@ -94,11 +109,19 @@ class Player(Character):
         if not item:
             print("Please specify an item to equip.")
             return
-        if item in self.inventory_items:
-            self.equipped_weapon = item
-            print(f"{self.name} equipped {item}.")
-        else:
+        if item not in self.inventory_items:
             print("You don't have that item.")
+            return
+
+        if item in Player.shop_items:
+            if 'attack' in Player.shop_items[item]:
+                self.equipped_weapon = item
+                self.attack_power = 2 + Player.shop_items[item]['attack']
+                print(f"{self.name} equipped {item}. Attack power updated to {self.attack_power}.")
+            elif 'defense' in Player.shop_items[item]:
+                self.equipped_armor = item
+                self.defense = Player.shop_items[item]['defense']
+                print(f"{self.name} equipped {item}. Defense updated to {self.defense}.")
 
     def use(self, item=None):
         if not item:
@@ -129,15 +152,15 @@ class Player(Character):
 
     def shop(self):
         print("You found a shop!")
-        for item, price in Player.shop_items.items():
-            print(f"{item} ({price}g)")
+        for item, info in Player.shop_items.items():
+            print(f"{item}: {info['price']}g")
 
     def buy(self, item=None):
         if not item:
             print("Please specify what to buy.")
             return
         if item in Player.shop_items:
-            price = Player.shop_items[item]
+            price = Player.shop_items[item]['price']
             if self.gold >= price:
                 self.gold -= price
                 self.inventory_items.append(item)
@@ -146,7 +169,6 @@ class Player(Character):
                 print("Not enough gold.")
         else:
             print("That item is not available in the shop.")
-
     def spawn_enemy(self):
         self.enemy = Enemy(self, self.explore_count)
         print(f"You encounter {self.enemy.name}!")
@@ -211,8 +233,6 @@ class Player(Character):
 
         if self.enemy.health <= 0:
             print(f"You defeated {self.enemy.name}!")
-            self.gold += 20
-            self.xp += 10
             self.quest_kill_progress += 1
             self.grow_after_kill(self.enemy)
 
@@ -230,12 +250,25 @@ class Player(Character):
 
     def grow_after_kill(self, enemy):
         self.attack_power += 0.2
-        if enemy.is_boss:
+        # 골드 보상 구분
+        if enemy.name in ['Rat', 'Slime', 'Baby Slime', 'Little Rat']:
+            self.gold += 5
+        elif enemy.name in ['Imp', 'Goblin', 'Orc Warrior', 'Skeleton Soldier', 'Dark Imp', 'Skeleton Archer']:
+            self.gold += 15
+        elif enemy.name in ['Orc', 'Troll', 'Skeleton', 'Zombie', 'Bomber', 'Ninja', 'Minotaur', 'Dark Knight', 'Warlock', 'Ogre']:
+            self.gold += 20
+        elif enemy.is_boss:
+            self.gold += 50
+
+        if enemy.name == 'Hydra':
+            print("You defeated the Final Boss Hydra! Congratulations!!!")
+            self.health_max += 5
+        elif enemy.is_boss:
             self.health_max += 3
-            print(f"Defeated Boss! Max health increased by 3!")
+            print("Defeated a Boss! Max health increased by 3!")
         elif enemy.is_elite:
             self.health_max += 1
-            print(f"Defeated Elite! Max health increased by 1!")
+            print("Defeated an Elite! Max health increased by 1!")
 
     def secret_room_reward(self):
         print("You cleared the secret room!")
@@ -248,9 +281,10 @@ class Player(Character):
             print(f"You also found a rare item: {item}!")
 
     def enemy_attacks(self):
-        damage = max(1, self.enemy.attack_power)
-        self.health -= damage
-        print(f"{self.enemy.name} attacks you for {damage} damage!")
+        raw_damage = self.enemy.attack_power
+        final_damage = max(1, raw_damage - self.defense)
+        self.health -= final_damage
+        print(f"{self.enemy.name} attacks you for {final_damage} damage!")
         if self.health <= 0:
             print("You died. GAME OVER.")
 
@@ -270,7 +304,6 @@ class Player(Character):
     def quest(self):
         print("Quest Progress:")
         print(f" - Kill {self.quest_kill_goal}: {self.quest_kill_progress}/{self.quest_kill_goal}")
-
 # ===== 명령어 등록 =====
 Commands = {
     'help': Player.help,
