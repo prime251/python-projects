@@ -61,4 +61,23 @@ Balancing the difficulty between early, mid, and late game enemies was challengi
 It was also tricky to manage multiple combat situations, like handling secret rooms with consecutive battles, while maintaining a smooth flow without errors.
 
 ### What I Want to Improve  
--Making the game more balenced
+- Making the game more balenced
+
+___________________________________________________________________________________________________________________________________________________________________________________________________
+
+## Project: calculator  
+**Date**: April 27, 2025  
+**Language**: Python
+
+### What the Project Does  
+The user puts in the operations and the numbers and the computer solves them
+
+### What I Learned  
+- Using variables
+- Using user's input
+
+### What Was Difficult  
+Using the user's input and making the computer solve it
+
+### What I Want to Improve  
+- calculating percentages
