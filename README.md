@@ -101,3 +101,22 @@ Making the computer randomly pick a person and using user's input and show who t
 
 ### What I Want to Improve  
 - Balenced hints
+
+__________________________________________________________________________________________________________________________________________________________________________________________________
+
+## Project: Blackjack
+**Date**: April 29, 2025  
+**Language**: Python
+
+### What the Project Does  
+Plays blackjack
+
+### What I Learned  
+- Using random
+- Using user's input
+
+### What Was Difficult  
+Using random
+
+### What I Want to Improve  
+- Making this game in Pygame
