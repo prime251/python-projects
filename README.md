@@ -81,3 +81,23 @@ Using the user's input and making the computer solve it
 
 ### What I Want to Improve  
 - calculating percentages
+
+
+___________________________________________________________________________________________________________________________________________________________________________________________________
+
+## Project: mafia game 
+**Date**: April 28, 2025  
+**Language**: Python
+
+### What the Project Does  
+It randomly picks on player to do mafia and the user has to find out who it is
+
+### What I Learned  
+- Using random
+- Using user's input
+
+### What Was Difficult  
+Making the computer randomly pick a person and using user's input and show who they are
+
+### What I Want to Improve  
+- Balenced hints
