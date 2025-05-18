@@ -120,3 +120,18 @@ Using random
 
 ### What I Want to Improve  
 - Making this game in Pygame
+
+_____
+
+## Project: Reaction time
+**Date**: may 18, 2025  
+**Language**: Python
+
+### What the Project Does  
+records reaction time
+
+### What Was Difficult  
+Timing
+
+### What I Want to Improve  
+- highscores
