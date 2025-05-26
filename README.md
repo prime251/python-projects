@@ -135,3 +135,40 @@ Timing
 
 ### What I Want to Improve  
 - highscores
+
+- --------------------------------------------------------------------------------------------------------------------
+## Project: Blackjack
+**Date**: April 29, 2025  
+**Language**: Python
+
+### What the Project Does  
+Plays blackjack
+
+### What I Learned  
+- Using random
+- Using user's input
+
+### What Was Difficult  
+Using random
+
+### What I Want to Improve  
+- Making this game in Pygame
+
+_____----------------------------------------------------------------------------------------------
+
+## Project: random rpg
+**Date**: may 26, 2025  
+**Language**: Python
+
+### What the Project Does  
+it is an rpg but all random
+
+### What I Learned  
+- Using random
+- Using user's input
+
+### What Was Difficult  
+variables
+
+### What I Want to Improve  
+- pygame
