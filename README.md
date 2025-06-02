@@ -172,3 +172,22 @@ variables
 
 ### What I Want to Improve  
 - pygame
+
+_____________________________________________________________________________________________________________
+
+## Project: l00km race
+Date**: june 2, 2025  
+**Language**: Python
+
+### What the Project Does 
+100 km race
+
+### What I Learned  
+- Using random
+- ranking
+
+### What Was Difficult  
+variables
+
+### What I Want to Improve  
+- pygame
