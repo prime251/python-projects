@@ -1,0 +1,32 @@
+import random
+
+r = random.randint(1,100)
+
+y = int(input('how many tries:   '))
+
+c = 0
+
+while True:
+    x = int(input("number:   "))
+    if c >= y:
+        print('game over')
+        print(f'the number was {r}')
+        break
+    elif x > r and x <= 100:
+        print('too big')
+        c += 1
+    elif x < r and x > 0:
+        print('too small')
+        c += 1
+    elif x <= 0:
+        print('positive numbers only')
+        c += 1
+    elif x > 100:
+        print('1 to 100 only')
+    elif x == r:
+        print('corect!')
+        c += 1
+        print(f'number of tries:  {c}')
+        break
+    else:
+        print('what?')
