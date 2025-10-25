@@ -1,0 +1,29 @@
+import random
+
+goblin_health = random.randint(15,30)
+
+player_health = 27
+
+while True:
+    print(f"goblin health is {goblin_health}, your health is {player_health}")
+    goblin_attack = random.randint(1,6)
+    y = input("press enter to roll your dice:   ")
+    x = random.randint(1, 6)
+    
+    if y == '':
+        print(f"dice rolled! the number is {x}")
+        goblin_health -= x
+        print(f'you attacked goblin for {x} damage!')
+        if goblin_health <= 0:
+            print("you win!")
+            break
+        print(f"goblin health is {goblin_health}, your health is {player_health}")
+        z = input("press enter to roll goblin's dice:   ")
+        
+        if z == '':
+            print(f"the number is {goblin_attack}")
+            print(f"goblin attacked you for {goblin_attack} damage")
+            player_health -= goblin_attack
+            if player_health  <= 0:
+                print('you died')
+                break
